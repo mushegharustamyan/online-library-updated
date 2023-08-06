@@ -13,5 +13,4 @@ app.listen(port , async () => {
     }catch(e) {
         console.log(e)
     }
-    
 })
