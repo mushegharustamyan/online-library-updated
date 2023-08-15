@@ -16,4 +16,6 @@ const connectionInit = async () =>
         })
     })  
 
+require("./Models/relations")
+
 module.exports = connectionInit

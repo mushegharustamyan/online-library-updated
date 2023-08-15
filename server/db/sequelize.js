@@ -1,6 +1,6 @@
-const { Sequelize, DataTypes, STRING } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize("iera", "root", "", {
+const sequelize = new Sequelize("library", "root", "", {
     host: "localhost",
     dialect: "mysql",
 });
