@@ -4,5 +4,6 @@ const Role = require("./role")
 const Book = require("./book")
 
 User.belongsTo(Role , {foreignKey: "roleId"})
+Book.belongsToMany(Author, {through: "bookAndAuthors"})
 
 module.exports = [User , Author , Role , Book]
