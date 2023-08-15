@@ -11,6 +11,6 @@ const Author = sequelize.define("authors" , {
         type: DataTypes.STRING,
         allowNull: false
     }
-})
+} , {timestamps: false})
 
 module.exports = Author
