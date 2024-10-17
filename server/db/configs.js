@@ -1,21 +1,21 @@
-const mysql = require('mysql2')
+import { createConnection } from "mysql2";
 
 const connectionInit = async () =>
-    new Promise((resolove, reject) => {
-        const connection = mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "",
-            port: "3306"
-        })
+  new Promise((resolove, reject) => {
+    const connection = createConnection({
+      host: "localhost",
+      user: "root",
+      password: "root",
+      port: "3306",
+    });
 
-        connection.query('CREATE DATABASE IF NOT EXISTS library', (err , res) => {
-            if(err) reject(err)
+    connection.query("CREATE DATABASE IF NOT EXISTS library", (err, res) => {
+      if (err) reject(err);
 
-            resolove(res)
-        })
-    })  
+      resolove(res);
+    });
+  });
 
-require("./Models/relations")
+import relations from "./Models/relations.js"
 
-module.exports = connectionInit
+export default connectionInit;

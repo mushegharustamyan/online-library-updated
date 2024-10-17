@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes } = require("sequelize");
+import { Sequelize, DataTypes } from "sequelize";
 
-const sequelize = new Sequelize("library", "root", "", {
-    host: "localhost",
-    dialect: "mysql",
+const sequelize = new Sequelize("library", "root", "root", {
+  host: "localhost",
+  dialect: "mysql",
 });
 
-module.exports = sequelize
+export default sequelize;

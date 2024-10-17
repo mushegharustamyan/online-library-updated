@@ -1,20 +1,20 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../sequelize.js";
 
-const Author = sequelize.define(
-  "authors",
+const Rating = sequelize.define(
+  "rating",
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
     },
-    fullName: {
-      type: DataTypes.STRING,
+    rate: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
   { timestamps: false }
 );
 
-export default Author;
+export default Rating;

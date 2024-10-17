@@ -1,18 +1,22 @@
-require("dotenv").config()
-const express = require("express")
-const connectionInit = require("./db/configs")
-const sequelize = require("./db/sequelize")
+import dotenv from "dotenv";
+import express from "express";
+import connectionInit from "./db/configs.js";
+import sequelize from "./db/sequelize.js";
+import { configureApp } from "./utils/app.js";
 
-const app = express()
+dotenv.config();
+const app = express();
 
-const port = process.env.PORT
+const port = process.env.PORT;
 
-app.listen(port , async () => {
-    console.log(`listen ${port}`)
-    try{
-        await connectionInit()
-        await sequelize.sync({alter: false , force: true})  
-    }catch(e) {
-        console.log(e)
-    }
-})
+configureApp(app)
+
+app.listen(port, async () => {
+  console.log(`listen ${port}`);
+  try {
+    await connectionInit();
+    await sequelize.sync({ alter: false, force: false });
+  } catch (e) {
+    console.log(e);
+  }
+});

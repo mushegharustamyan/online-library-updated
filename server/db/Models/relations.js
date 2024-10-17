@@ -1,10 +1,12 @@
-const User = require("./user")
-const Author = require("./author")
-const Role = require("./role")
-const Book = require("./book")
-const BooksAndAuthors = require("./books_and_authors")
+import User from "./user.js";
+import Author from "./author.js";
+import Role from "./role.js";
+import Book from "./book.js";
+import Rating from "./rating.js";
+import { BelongsTo, HasMany } from "sequelize";
 
-User.belongsTo(Role , {foreignKey: "roleId"})
-Book.belongsToMany(Author, {through: BooksAndAuthors})
+Role.belongsTo(Role, { foreignKey: "roleId" });
+Author.belongsTo(Author, { foreignKey: "authorId" });
+Rating.hasMany(Rating, { foreignKey: "bookId" });
 
-module.exports = [User , Author , Role , Book , BooksAndAuthors]
+export default [User, Author, Role, Book];

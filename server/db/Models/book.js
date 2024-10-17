@@ -1,20 +1,24 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../sequelize");
+import { DataTypes } from "sequelize";
+import sequelize from "../sequelize.js";
 
-const Book = sequelize.define("books" , {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
+const Book = sequelize.define(
+  "books",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  description: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
-}, {timestamps: false})
+  { timestamps: false }
+);
 
-module.exports = Book
+export default Book;
