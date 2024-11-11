@@ -1,5 +1,7 @@
+import { sendResStatus } from "../utils/response.js";
+
 const pingController = (req, res) => {
-  return res.status(200).json("pong");
+  return sendResStatus(res, 200, "pong");
 };
 
-export default pingController
+export default pingController;
