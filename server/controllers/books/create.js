@@ -10,7 +10,7 @@ export const create = async (req, res) => {
 
     if (!author) return sendResStatus(res, 400, "Author not found");
 
-    const created = await Book.create({ title, description, authorId });
+    await Book.create({ title, description, authorId });
 
     return sendResStatus(res, 201);
   } catch (e) {
