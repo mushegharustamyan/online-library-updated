@@ -3,6 +3,7 @@ import express from "express";
 import connectionInit from "./db/configs.js";
 import sequelize from "./db/sequelize.js";
 import { configureApp } from "./utils/app.js";
+import migrations from "./db/migrations.js";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.listen(port, async () => {
   try {
     await connectionInit();
     await sequelize.sync({ alter: true, force: false });
+    await migrations.migrateRoles()
   } catch (e) {
     console.log(e);
   }
