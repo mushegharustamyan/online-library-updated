@@ -13,5 +13,6 @@ Book.belongsTo(Author, {
 });
 Author.hasMany(Book);
 Rating.hasMany(Rating, { foreignKey: "bookId" });
+User.hasOne(Rating, { foreignKey: {name: "userId" , allowNull: false}});
 
 export default [User, Author, Role, Book];

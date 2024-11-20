@@ -13,6 +13,9 @@ const Rating = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    comment: {
+      type: DataTypes.STRING
+    }
   },
   { timestamps: false }
 );
