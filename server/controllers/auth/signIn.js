@@ -22,7 +22,7 @@ export const signIn = async (req, res) => {
         id: user.id,
       },
       getEnv("JWT_SECRET"),
-      { expiresIn: 80000 }
+      { expiresIn: 80000, algorithm: "HS256" }
     );
 
     return sendResBody(res, 200, token);

@@ -6,8 +6,12 @@ import ratingRouter from "../routes/ratings.js"
 
 export const configureApp = (app) => {
   app.use("/", pingRouter);
+
   app.use("/auth", authRouter);
+
   app.use("/books", bookRouter);
+
   app.use("/authors", authorRouter);
-  app.use("book/:id/rate", ratingRouter)
+  
+  app.use("/book", ratingRouter)
 };

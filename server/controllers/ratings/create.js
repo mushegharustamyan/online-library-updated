@@ -1,15 +1,17 @@
-import { sendResStatus } from "../../utils/response.js"
-import Rating from "../../db/Models/rating.js"
+import { sendResStatus } from "../../utils/response.js";
+import Rating from "../../db/Models/rating.js";
 
-export const create = async (req , res) => {
-    try {
-        const {rate , comment , bookId} = req.body
+export const create = async (req, res) => {
+  try {
+    const { rate, comment, payload } = req.body;
 
-        await Rating.create({rate , bookId , comment , userId: req.userId})
+    const bookId = req.params.id;
 
-        sendResStatus(res , 201)
-    } catch(e) {
-        console.log(e)
-        sendResStatus(res , 500)
-    }
-}
+    await Rating.create({ rate, bookId, comment, userId: req.payload.id });
+
+    sendResStatus(res, 201);
+  } catch (e) {
+    console.log(e);
+    sendResStatus(res, 500);
+  }
+};

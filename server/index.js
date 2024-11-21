@@ -16,7 +16,7 @@ app.listen(port, async () => {
   console.log(`listen ${port}`);
   try {
     await connectionInit();
-    await sequelize.sync({ alter: true, force: true });
+    await sequelize.sync({ alter: true, force: false });
     await migrations.migrateRoles();
   } catch (e) {
     console.log(e);
