@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-import createMiddlewares from "../middlewares/books.js/create.js";
+import createMiddlewares from "../middlewares/books/create.js";
 
 import { create } from "../controllers/books/create.js";
 import { show } from "../controllers/authors/show.js";

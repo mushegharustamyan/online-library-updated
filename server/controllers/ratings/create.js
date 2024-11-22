@@ -3,7 +3,7 @@ import Rating from "../../db/Models/rating.js";
 
 export const create = async (req, res) => {
   try {
-    const { rate, comment, payload } = req.body;
+    const { rate, comment} = req.body;
 
     const bookId = req.params.id;
 

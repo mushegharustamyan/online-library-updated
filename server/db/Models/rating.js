@@ -15,6 +15,13 @@ const Rating = sequelize.define(
     },
     comment: {
       type: DataTypes.STRING
+    },
+    changeReason: {
+      type: DataTypes.STRING
+    },
+    changed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   },
   { timestamps: false }
