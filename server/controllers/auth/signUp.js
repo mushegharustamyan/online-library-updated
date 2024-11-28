@@ -16,7 +16,8 @@ export const signUp = async (req, res) => {
         lastName,
         password: hashedPassword,
         email,
-        dateOfBirth
+        dateOfBirth,
+        roleId: 3, // The User's Role ID
       },
     });
 
@@ -24,7 +25,7 @@ export const signUp = async (req, res) => {
 
     return sendResStatus(res, 409, "User Already exists");
   } catch (e) {
-    console.log(e)
-    return sendResStatus(res, 400 , `Bad Request ${e.message}`);
+    console.log(e);
+    return sendResStatus(res, 500);
   }
 };

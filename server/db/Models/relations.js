@@ -4,7 +4,7 @@ import Role from "./role.js";
 import Book from "./book.js";
 import Rating from "./rating.js";
 
-Role.belongsTo(Role, { foreignKey: "roleId" });
+User.belongsTo(Role, { foreignKey: "roleId" });
 Book.belongsTo(Author, {
   foreignKey: {
     name: "authorId",
@@ -13,6 +13,6 @@ Book.belongsTo(Author, {
 });
 Author.hasMany(Book);
 Rating.hasMany(Rating, { foreignKey: "bookId" });
-User.hasOne(Rating, { foreignKey: {name: "userId" , allowNull: false}});
+User.hasOne(Rating, { foreignKey: { name: "userId", allowNull: false } });
 
 export default [User, Author, Role, Book];

@@ -13,6 +13,10 @@ const Author = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
   },
   { timestamps: false }
 );

@@ -31,8 +31,11 @@ const User = sequelize.define(
     },
     dateOfBirth: {
       type: DataTypes.DATE,
-      allowNull: false,
     },
+    active :{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   },
   {
     indexes: [
