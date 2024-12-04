@@ -11,10 +11,6 @@ const Role = sequelize.define("roles", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  access_level: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  }
 });
 
 export default Role;

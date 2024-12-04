@@ -20,6 +20,7 @@ export const signIn = async (req, res) => {
     const token = jwt.sign(
       {
         id: user.id,
+        roleId: user.roleId,
       },
       getEnv("JWT_SECRET"),
       { expiresIn: 80000, algorithm: "HS256" }
