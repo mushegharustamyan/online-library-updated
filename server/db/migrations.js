@@ -7,15 +7,12 @@ const migrateRoles = async () => {
     const newRoles = [
       {
         name: "Admin",
-        access_level: 1,
       },
       {
         name: "Manager",
-        access_level: 2,
       },
       {
         name: "User",
-        access_level: 3,
       },
     ];
 

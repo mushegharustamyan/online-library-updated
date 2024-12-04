@@ -4,8 +4,8 @@ import sequelize from "../sequelize.js";
 const Permissions = sequelize.define("Permissions", {
   id: {
     primaryKey: true,
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
   },
   create: {
     type: DataTypes.BOOLEAN,
@@ -25,4 +25,4 @@ const Permissions = sequelize.define("Permissions", {
   },
 });
 
-export default Permissions
+export default Permissions;

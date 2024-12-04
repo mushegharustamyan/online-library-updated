@@ -5,8 +5,8 @@ const Book = sequelize.define(
   "books",
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     title: {
@@ -19,8 +19,8 @@ const Book = sequelize.define(
     },
     active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
-    }
+      defaultValue: true,
+    },
   },
   { timestamps: false }
 );

@@ -5,9 +5,9 @@ const Author = sequelize.define(
   "authors",
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.UUID,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4
     },
     fullName: {
       type: DataTypes.STRING,

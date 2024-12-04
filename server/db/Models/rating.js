@@ -6,23 +6,23 @@ const Rating = sequelize.define(
   {
     id: {
       primaryKey: true,
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
     },
     rate: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     comment: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     changeReason: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     changed: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   },
   { timestamps: false }
 );

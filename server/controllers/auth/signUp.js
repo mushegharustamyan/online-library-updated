@@ -1,6 +1,7 @@
 import { sendResStatus } from "../../utils/response.js";
 import bcrypt from "bcrypt";
 import User from "../../db/Models/user.js";
+import Role from "../../db/Models/role.js";
 
 export const signUp = async (req, res) => {
   try {
@@ -8,6 +9,10 @@ export const signUp = async (req, res) => {
 
     const salt = 10;
     const hashedPassword = await bcrypt.hash(password, salt);
+
+    const userRole = await Role.findOne({where: {name :'User'}})
+
+    const {id} = userRole
 
     const [user, created] = await User.findOrCreate({
       where: { email },
@@ -17,7 +22,7 @@ export const signUp = async (req, res) => {
         password: hashedPassword,
         email,
         dateOfBirth,
-        roleId: 3, // The User's Role ID
+        roleId: id
       },
     });
 

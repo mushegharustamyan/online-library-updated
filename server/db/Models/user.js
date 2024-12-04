@@ -5,9 +5,9 @@ const User = sequelize.define(
   "users",
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     firstName: {
       type: DataTypes.STRING,
@@ -32,10 +32,10 @@ const User = sequelize.define(
     dateOfBirth: {
       type: DataTypes.DATE,
     },
-    active :{
+    active: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
-    }
+      defaultValue: true,
+    },
   },
   {
     indexes: [
