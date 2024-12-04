@@ -19,6 +19,7 @@ app.listen(port, async () => {
     await sequelize.sync({ alter: true, force: false });
     await migrations.migrateRoles();
     await migrations.syncModels();
+    await migrations.migrateDefaultPermissions()
   } catch (e) {
     console.log(e);
   }

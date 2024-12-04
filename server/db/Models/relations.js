@@ -18,6 +18,6 @@ Rating.hasMany(Rating, { foreignKey: "bookId" });
 User.hasOne(Rating, { foreignKey: { name: "userId", allowNull: false } });
 
 Models.hasMany(Permissions, { foreignKey: "modelId" });
-Role.hasMany(Permissions, { foreignKey: "rolelId" });
+Role.hasMany(Permissions, { foreignKey: "roleId" });
 
 export default [User, Author, Role, Book];
