@@ -3,6 +3,8 @@ import Models from "./Models/models.js";
 
 import sequelize from "./sequelize.js";
 import Permissions from "./Models/permissions.js";
+
+import { setPermission } from "../utils/helpers.js";
 const migrateRoles = async () => {
   try {
     const newRoles = [
@@ -31,18 +33,18 @@ const migrateRoles = async () => {
 
 const syncModels = async () => {
   try {
-    const [results] = await sequelize.query(`
+    const [tables] = await sequelize.query(`
       SELECT TABLE_NAME 
       FROM INFORMATION_SCHEMA.TABLES 
       WHERE TABLE_SCHEMA = 'library'
     `);
 
-    results.forEach(async (value) => {
+    for (let table of tables) {
       await Models.findOrCreate({
-        where: { name: value.TABLE_NAME },
-        defaults: { name: value.TABLE_NAME },
+        where: { name: table.TABLE_NAME },
+        defaults: { name: table.TABLE_NAME },
       });
-    });
+    }
   } catch (e) {
     console.log(e);
   }
@@ -56,16 +58,13 @@ const migrateDefaultPermissions = async () => {
 
   if (permissions.length > 0) return;
 
-  roles.forEach(async (role) => {
+  for (let role of roles) {
     if (role.name === "Admin") {
       const adminPermissions = models.map((model) => {
         return {
           modelId: model.id,
           roleId: role.id,
-          create: true,
-          update: true,
-          read: true,
-          delete: true,
+          ...setPermission("create", "read", "update", "delete"),
         };
       });
 
@@ -73,7 +72,8 @@ const migrateDefaultPermissions = async () => {
     }
 
     if (role.name === "Manager") {
-      const managaerPermissions = models.map((model) => {
+      const managerPermissions = models.map((model) => {
+        console.log(model.name);
         if (
           model.name === "users" ||
           model.name === "permissions" ||
@@ -81,25 +81,21 @@ const migrateDefaultPermissions = async () => {
         ) {
           return {
             modelId: model.id,
+            modelName: model.name,
             roleId: role.id,
-            create: false,
-            update: false,
-            read: true,
-            delete: false,
+            ...setPermission("read"),
           };
         }
 
         return {
           modelId: model.id,
           roleId: role.id,
-          create: true,
-          update: true,
-          read: true,
-          delete: true,
+          modelName: model.name,
+          ...setPermission("read", "create", "update", "delete"),
         };
       });
 
-      await Permissions.bulkCreate(managaerPermissions);
+      await Permissions.bulkCreate(managerPermissions);
     }
 
     if (role.name === "User") {
@@ -112,10 +108,7 @@ const migrateDefaultPermissions = async () => {
           return {
             modelId: model.id,
             roleId: role.id,
-            create: false,
-            update: false,
-            read: false,
-            delete: false,
+            ...setPermission(),
           };
         }
 
@@ -127,30 +120,22 @@ const migrateDefaultPermissions = async () => {
           return {
             modelId: model.id,
             roleId: role.id,
-            create: false,
-            update: false,
-            read: true,
-            delete: false,
+            ...setPermission("read"),
           };
         }
 
-        if (
-          model.name === "ratings" 
-        ) {
+        if (model.name === "ratings") {
           return {
             modelId: model.id,
             roleId: role.id,
-            create: true,
-            update: true,
-            read: true,
-            delete: true,
+            ...setPermission("read", "create", "update", "delete"),
           };
         }
       });
 
       await Permissions.bulkCreate(userPermissions);
     }
-  });
+  }
 };
 
 export default { migrateRoles, syncModels, migrateDefaultPermissions };
