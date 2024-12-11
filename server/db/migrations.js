@@ -1,10 +1,13 @@
 import Role from "./Models/role.js";
 import Models from "./Models/models.js";
+import bcrypt from "bcrypt"
 
 import sequelize from "./sequelize.js";
 import Permissions from "./Models/permissions.js";
 
 import { setPermission } from "../utils/helpers.js";
+import User from "./Models/user.js";
+
 const migrateRoles = async () => {
   try {
     const newRoles = [
@@ -138,4 +141,28 @@ const migrateDefaultPermissions = async () => {
   }
 };
 
-export default { migrateRoles, syncModels, migrateDefaultPermissions };
+const migrateAdmin = async () => {
+  try {
+    const admin = {
+      firstName: "Admin",
+      lastName: "Admin",
+      email: "admin@admin.com",
+      password: (await bcrypt.hash("a1a", 10)),
+      roleId: (await Role.findOne({ where: { name: "Admin" } })).id,
+    };
+
+    await User.findOrCreate({
+      where: { email: "admin@admin.com" },
+      defaults: admin,
+    });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+export default {
+  migrateRoles,
+  syncModels,
+  migrateDefaultPermissions,
+  migrateAdmin,
+};

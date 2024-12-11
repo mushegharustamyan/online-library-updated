@@ -16,10 +16,11 @@ configureApp(app);
 app.listen(port, async () => {
   try {
     await connectionInit();
-    await sequelize.sync({ alter: true, force: false });
+    await sequelize.sync({ alter: true, force: true });
     await migrations.migrateRoles();
     await migrations.syncModels();
     await migrations.migrateDefaultPermissions()
+    await migrations.migrateAdmin()
     console.log(`listen ${port}`);
   } catch (e) {
     console.log(e);
