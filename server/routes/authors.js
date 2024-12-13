@@ -10,12 +10,13 @@ import Author from "../db/Models/author.js";
 import { verifyToken } from "../middlewares/auth/verifyToken.js";
 import { verifyPermission } from "../middlewares/verifyPermission.js";
 
-router.post("/", createMiddlewares.checkRequiredFields, create);
-router.get(
-  "/:id",
+router.post(
+  "/",
   verifyToken,
-  verifyPermission("authors", "read"),
-  showRecord(Author)
+  verifyPermission("authors", "create"),
+  createMiddlewares.checkRequiredFields,
+  create
 );
+router.get("/:id", showRecord(Author));
 
 export default router;
