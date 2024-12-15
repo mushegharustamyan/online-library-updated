@@ -4,10 +4,9 @@ import connectionInit from "./db/configs.js";
 import sequelize from "./db/sequelize.js";
 import { configureApp } from "./utils/app.js";
 import migrations from "./db/migrations.js";
-import Models from "./db/Models/models.js";
 
 dotenv.config();
-const app = express();
+export default app = express();
 app.use(express.json());
 const port = process.env.PORT;
 
@@ -19,10 +18,10 @@ app.listen(port, async () => {
     await sequelize.sync({ alter: true, force: true });
     await migrations.migrateRoles();
     await migrations.syncModels();
-    await migrations.migrateDefaultPermissions()
-    await migrations.migrateAdmin()
+    await migrations.migrateDefaultPermissions();
+    await migrations.migrateAdmin();
     console.log(`listen ${port}`);
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
 });
