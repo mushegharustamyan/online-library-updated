@@ -7,6 +7,7 @@ const connectionInit = async () =>
       user: "root",
       password: "root",
       port: "3306",
+      charset: "utf8"
     });
 
     connection.query("CREATE DATABASE IF NOT EXISTS library", (err, res) => {

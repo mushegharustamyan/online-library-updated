@@ -6,22 +6,28 @@ import { configureApp } from "./utils/app.js";
 import migrations from "./db/migrations.js";
 
 dotenv.config();
-export default app = express();
+export const app = express();
 app.use(express.json());
 const port = process.env.PORT;
 
 configureApp(app);
 
-app.listen(port, async () => {
-  try {
-    await connectionInit();
-    await sequelize.sync({ alter: true, force: true });
-    await migrations.migrateRoles();
-    await migrations.syncModels();
-    await migrations.migrateDefaultPermissions();
-    await migrations.migrateAdmin();
-    console.log(`listen ${port}`);
-  } catch (e) {
-    console.log(e)
-  }
-});
+const runServer = () => {
+  return app.listen(port, async () => {
+    try {
+      await connectionInit();
+      await sequelize.sync({ alter: true, force: true });
+      await migrations.migrateRoles();
+      await migrations.syncModels();
+      await migrations.migrateDefaultPermissions();
+      await migrations.migrateAdmin();
+      console.log(`listen ${port}`);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+};
+
+if (process.env.NODE_ENV !== "test") {
+  runServer();
+}
